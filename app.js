@@ -1,3 +1,5 @@
+import Webhook from "./components/webhook.js";
+
 this.sideBarEdit("Audio Streamer", [
     {
       label: "Test Label",
@@ -7,11 +9,37 @@ this.sideBarEdit("Audio Streamer", [
     }
   ]);
 
+async function FileDialog() {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.click();
+    
+    return await new Promise((resolve, reject) => {
+        input.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                resolve(file);
+            }
+            else {
+                reject();
+            }
+            input.remove();
+        });
+    })
+}
+
   if (location.pathname === "/dashboard/files") {
-    var old_element = document.querySelector('[data-button="upload"]');
-    var new_element = old_element.cloneNode(true);
-    old_element.parentNode.replaceChild(new_element, old_element);
-    new_element.addEventListener("click", () => {
-        console.log("e")
+    // Replace the upload button and reassign its event listeners
+    const old_upload_button = document.querySelector('[data-button="upload"]');
+    const upload_button = old_upload_button.cloneNode(true);
+    old_upload_button.parentNode.replaceChild(upload_button, old_upload_button);
+    new_element.addEventListener("click", async () => {
+        if (!localStorage.getItem("mediah-webhook")) { 
+            new Webhook();
+        }
+        else {
+            var file = await FileDialog();
+            console.log(file);
+        }
     })
   };
