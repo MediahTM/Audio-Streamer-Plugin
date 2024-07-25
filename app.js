@@ -8,5 +8,10 @@ this.sideBarEdit("Audio Streamer", [
   ]);
 
   if (location.pathname === "/dashboard/files") {
-    console.log(document.querySelector('[data-button="upload"]'))
+    var old_element = document.querySelector('[data-button="upload"]');
+    var new_element = old_element.cloneNode(true);
+    old_element.parentNode.replaceChild(new_element, old_element);
+    new_element.addEventListener("click", () => {
+        console.log("e")
+    })
   };
