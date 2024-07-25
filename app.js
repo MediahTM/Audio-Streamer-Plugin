@@ -1,6 +1,3 @@
-const WebhookModule = await import("./components/webhook.js");
-const Webhook = WebhookModule.default;
-
 this.sideBarEdit("Audio Streamer", [
     {
       label: "Test Label",
@@ -35,6 +32,8 @@ async function FileDialog() {
     const upload_button = old_upload_button.cloneNode(true);
     old_upload_button.parentNode.replaceChild(upload_button, old_upload_button);
     new_element.addEventListener("click", async () => {
+        const WebhookModule = await import("./components/webhook.js");
+        const Webhook = WebhookModule.default;
         if (!localStorage.getItem("mediah-webhook")) { 
             new Webhook();
         }
