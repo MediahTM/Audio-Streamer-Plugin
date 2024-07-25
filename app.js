@@ -1,4 +1,5 @@
-import Webhook from "./components/webhook.js";
+const WebhookModule = await import("./components/webhook.js");
+const Webhook = WebhookModule.default;
 
 this.sideBarEdit("Audio Streamer", [
     {
