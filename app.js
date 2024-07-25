@@ -31,7 +31,7 @@ async function FileDialog() {
     const old_upload_button = document.querySelector('[data-button="upload"]');
     const upload_button = old_upload_button.cloneNode(true);
     old_upload_button.parentNode.replaceChild(upload_button, old_upload_button);
-    new_element.addEventListener("click", async () => {
+    upload_button.addEventListener("click", async () => {
         const WebhookModule = await import("./components/webhook.js");
         const Webhook = WebhookModule.default;
         if (!localStorage.getItem("mediah-webhook")) { 
